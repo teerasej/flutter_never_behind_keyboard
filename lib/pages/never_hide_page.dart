@@ -27,36 +27,36 @@ class _NeverHidePageState extends State<NeverHidePage> {
         padding: const EdgeInsets.all(8.0),
         child: NeverBehindKeyboardArea(
           scrollView: ListView(
-          controller: scrollController,
-          children: [
-            const SizedBox(
-              height: 600,
-            ),
-            const Text('Course Name:'),
-              Container(
-              child: Column(
-                children: [
-                  NeverHideBox(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText:
-                            "หลักสูตรอบรม Google Flutter 2 สำหรับผู้เริ่มต้น",
-                      ),
-                      focusNode: focusNode,
-                    ),
-                  ),
-                  const SizedBox(
-                      height: 70,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Hello'),
-                  ),
-                    NeverHideBottom(key: GlobalKey()),
-                ],
+            controller: scrollController,
+            children: [
+              const SizedBox(
+                height: 600,
               ),
-            ),
-          ],
+              const Text('Course Name:'),
+              Container(
+                child: Column(
+                  children: [
+                    NeverHideBox(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText:
+                              "หลักสูตรอบรม Google Flutter 2 สำหรับผู้เริ่มต้น",
+                        ),
+                        focusNode: focusNode,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 70,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Hello'),
+                    ),
+                    NeverHideBottom(key: GlobalKey()),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
