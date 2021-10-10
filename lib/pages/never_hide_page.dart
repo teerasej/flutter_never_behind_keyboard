@@ -25,14 +25,15 @@ class _NeverHidePageState extends State<NeverHidePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView(
+        child: NeverBehindKeyboardArea(
+          scrollView: ListView(
           controller: scrollController,
           children: [
             const SizedBox(
               height: 600,
             ),
             const Text('Course Name:'),
-            NeverBehindKeyboardArea(
+              Container(
               child: Column(
                 children: [
                   NeverHideBox(
@@ -56,6 +57,7 @@ class _NeverHidePageState extends State<NeverHidePage> {
               ),
             ),
           ],
+          ),
         ),
       ),
     );
