@@ -46,7 +46,7 @@ class _NeverHidePageState extends State<NeverHidePage> {
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
+                      height: 70,
                   ),
                   ElevatedButton(
                     onPressed: () {},
