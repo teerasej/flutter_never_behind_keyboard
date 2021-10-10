@@ -29,13 +29,9 @@ class _Test2PageState extends State<Test2Page> {
 
   void prepareScroll() async {
     if (focusNode.hasFocus) {
-      setState(() {
-        _textFieldFocused = true;
-      });
+      _textFieldFocused = true;
     } else {
-      setState(() {
-        _textFieldFocused = false;
-      });
+      _textFieldFocused = false;
     }
   }
 
@@ -45,64 +41,70 @@ class _Test2PageState extends State<Test2Page> {
       alignment: 1,
       alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
     );
-
-    // setState(() {
-    //   _textFieldFocused = false;
-    // });
+    _textFieldFocused = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    // WidgetsBinding.instance?.addPostFrameCallback((_) => scrollNow());
-    if (_textFieldFocused) {
-      SchedulerBinding.instance?.addPostFrameCallback((_) => scrollNow());
-    }
+    return NotificationListener(
+      onNotification: (Notification notification) {
+        if (notification is ScrollEndNotification) {
+          print('scroll end.');
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Never Hide'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView(
-          key: listViewKey,
-          controller: scrollController,
-          children: [
-            const SizedBox(
-              height: 600,
-            ),
-            const Text('Course Name:'),
-            Container(
-              color: Colors.yellow,
-              child: Column(
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText: "test page",
-                    ),
-                    focusNode: focusNode,
-                  ),
-                  const SizedBox(
-                    height: 60,
-                  ),
-                  ElevatedButton(
-                    key: key,
-                    onPressed: () {},
-                    child: const Text('Hello'),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 100,
-            ),
-          ],
+          if (_textFieldFocused) {
+            _textFieldFocused = false;
+            scrollNow();
+          }
+        }
+
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Never Hide'),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await scrollNow();
-        },
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView(
+            key: listViewKey,
+            controller: scrollController,
+            children: [
+              const SizedBox(
+                height: 600,
+              ),
+              const Text('Course Name:'),
+              Container(
+                color: Colors.yellow,
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: "test page",
+                      ),
+                      focusNode: focusNode,
+                    ),
+                    const SizedBox(
+                      height: 60,
+                    ),
+                    ElevatedButton(
+                      key: key,
+                      onPressed: () {},
+                      child: const Text('Hello'),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 100,
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            await scrollNow();
+          },
+        ),
       ),
     );
   }
