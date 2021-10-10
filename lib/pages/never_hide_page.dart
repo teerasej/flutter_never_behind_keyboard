@@ -52,7 +52,7 @@ class _NeverHidePageState extends State<NeverHidePage> {
                     onPressed: () {},
                     child: const Text('Hello'),
                   ),
-                  NeverHideBottom(key: key),
+                    NeverHideBottom(key: GlobalKey()),
                 ],
               ),
             ),
