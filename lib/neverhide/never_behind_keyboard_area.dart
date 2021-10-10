@@ -1,68 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_never_behind_keyboard/neverhide/never_hide_bottom.dart';
 
-class NeverBehindKeyboardArea extends StatelessWidget {
-  final Widget child;
+class NeverBehindKeyboardArea extends StatefulWidget {
+  final ScrollView scrollView;
   late NeverHideBottom bottom;
   late BuildContext _context;
-  late ScrollView _theScroller = ListView();
+  late bool widgetInFocus = false;
 
-  NeverBehindKeyboardArea({Key? key, required this.child}) : super(key: key);
+  NeverBehindKeyboardArea({Key? key, required this.scrollView})
+      : super(key: key);
 
   @override
+  _NeverBehindKeyboardAreaState createState() =>
+      _NeverBehindKeyboardAreaState();
+}
+
+class _NeverBehindKeyboardAreaState extends State<NeverBehindKeyboardArea> {
+  @override
   Widget build(BuildContext context) {
-    _context = context;
+    // _context = context;
 
-    context.visitAncestorElements((element) {
-      var parentWidget = element.widget;
+    // context.visitAncestorElements((element) {
+    //   var parentWidget = element.widget;
 
-      if (parentWidget is ListView ||
-          // parentWidget is SingleChildScrollView ||
-          parentWidget is ScrollView) {
-        _theScroller = parentWidget as ScrollView;
-        return false;
-      }
+    //   if (parentWidget is ListView ||
+    //       // parentWidget is SingleChildScrollView ||
+    //       parentWidget is ScrollView) {
+    //     _theScroller = parentWidget as ScrollView;
+    //     return false;
+    //   }
 
-      return true;
-    });
+    //   return true;
+    // });
 
-    return child;
-  }
+    return NotificationListener(
+      onNotification: (Notification notification) {
+        if (notification is ScrollEndNotification) {
+          print('scroll end.');
 
-  void scrollToBottom() {
-    var scrollController = _theScroller.controller;
-    // scrollController?.position.ensureVisible(
-    //   _getBottomContext().findRenderObject() as RenderObject,
-    //   alignment: 0.5,
-    //   duration: const Duration(seconds: 2),
-    // );
+          if (widget.widgetInFocus) {
+            widget.widgetInFocus = false;
+            _scrollToBottom();
+          }
+        }
 
-    // MediaQuery.of(_getBottomContext()).
-
-    RenderBox neverHideBottomBox =
-        _getBottomContext().findRenderObject() as RenderBox;
-    final positionRed = neverHideBottomBox.localToGlobal(Offset.zero);
-    print("POSITION of Red: $positionRed ");
-
-    scrollController?.animateTo(
-      positionRed.dy,
-      duration: Duration(seconds: 2),
-      curve: Curves.ease,
+        return true;
+      },
+      child: widget.scrollView,
     );
   }
 
-  void focusToBottom() {
-    // BuildContext currentContext = _getBottomContext()
-    Scrollable.ensureVisible(
-      _context,
+  Future<void> _scrollToBottom() async {
+    await Scrollable.ensureVisible(
+      _getBottomContext(),
+      alignment: 1,
       alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
     );
   }
 
   BuildContext _getBottomContext() {
-    return (bottom.key as GlobalKey).currentContext as BuildContext;
+    return (widget.bottom.key as GlobalKey).currentContext as BuildContext;
   }
 }
+
+
 
 // class _NeverBehindKeyboardAreaState extends State<NeverBehindKeyboardArea> {
 //   // Widget _theScroller = Container();
