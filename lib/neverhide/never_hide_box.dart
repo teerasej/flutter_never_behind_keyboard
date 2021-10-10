@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_never_behind_keyboard/neverhide/never_behind_keyboard_area.dart';
+import 'package:flutter_never_behind_keyboard/neverhide/never_hide_source_focus_notification.dart';
 
 class NeverHideBox extends StatefulWidget {
   final Widget child;
@@ -27,7 +28,10 @@ class _NeverHideBoxState extends State<NeverHideBox> {
     return Focus(
       child: widget.child,
       onFocusChange: (bool hasFocus) {
-        neverHideArea.widgetInFocus = true;
+        //neverHideArea.widgetInFocus = true;
+        if (hasFocus) {
+          NeverHideSourceNotification(hasFocus).dispatch(context);
+        }
       },
     );
   }

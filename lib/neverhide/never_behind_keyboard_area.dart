@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_never_behind_keyboard/neverhide/never_hide_bottom.dart';
+import 'package:flutter_never_behind_keyboard/neverhide/never_hide_source_focus_notification.dart';
 
 class NeverBehindKeyboardArea extends StatefulWidget {
   final ScrollView scrollView;
@@ -42,6 +43,9 @@ class _NeverBehindKeyboardAreaState extends State<NeverBehindKeyboardArea> {
             widget.widgetInFocus = false;
             _scrollToBottom();
           }
+        } else if (notification is NeverHideSourceNotification) {
+          print('widget child in focus: ${notification.hasFocus}');
+          widget.widgetInFocus = notification.hasFocus;
         }
 
         return true;
