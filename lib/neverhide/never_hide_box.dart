@@ -24,18 +24,11 @@ class _NeverHideBoxState extends State<NeverHideBox> {
       return true;
     });
 
-    if (widget.child is TextField) {
-      var textField = widget.child as TextField;
-      textField.focusNode?.addListener(_onFocusChange);
-    }
-
-    return widget.child;
-  }
-
-  void _onFocusChange() {
-    var textField = widget.child as TextField;
-    if (textField.focusNode!.hasFocus) {
-      neverHideArea.widgetInFocus = true;
-    }
+    return Focus(
+      child: widget.child,
+      onFocusChange: (bool hasFocus) {
+        neverHideArea.widgetInFocus = true;
+      },
+    );
   }
 }
