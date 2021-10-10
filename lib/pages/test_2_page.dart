@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter/scheduler.dart';
 
 class Test2Page extends StatefulWidget {
   Test2Page({Key? key}) : super(key: key);
@@ -15,29 +15,48 @@ class _Test2PageState extends State<Test2Page> {
   GlobalKey key = GlobalKey();
   GlobalKey listViewKey = GlobalKey();
 
-  KeyboardVisibilityController keyboardVisibilityController =
-      KeyboardVisibilityController();
+  bool _textFieldFocused = false;
 
   ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
-    // keyboardVisibilityController.onChange.listen((bool visible) async {
-    //   print('Keyboard visibility update. Is visible: ${visible}');
-
-    //   if (focusNode.hasFocus) {
-    //     await scrollNow();
-    //     setState(() {});
-    //   }
-    // });
+    focusNode.addListener(prepareScroll);
 
     // TODO: implement initState
     super.initState();
   }
 
+  void prepareScroll() async {
+    if (focusNode.hasFocus) {
+      setState(() {
+        _textFieldFocused = true;
+      });
+    } else {
+      setState(() {
+        _textFieldFocused = false;
+      });
+    }
+  }
+
+  scrollNow() async {
+    await Scrollable.ensureVisible(
+      key.currentContext as BuildContext,
+      alignment: 1,
+      alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+    );
+
+    // setState(() {
+    //   _textFieldFocused = false;
+    // });
+  }
+
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance?.addPostFrameCallback((_) => scrollNow());
+    // WidgetsBinding.instance?.addPostFrameCallback((_) => scrollNow());
+    if (_textFieldFocused) {
+      SchedulerBinding.instance?.addPostFrameCallback((_) => scrollNow());
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -64,7 +83,7 @@ class _Test2PageState extends State<Test2Page> {
                     focusNode: focusNode,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 60,
                   ),
                   ElevatedButton(
                     key: key,
@@ -88,14 +107,11 @@ class _Test2PageState extends State<Test2Page> {
     );
   }
 
-  Future<void> scrollNow() async {
-    if (focusNode.hasFocus) {
-      await Scrollable.ensureVisible(
-        key.currentContext as BuildContext,
-        alignment: 1,
-        alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
-      );
-      setState(() {});
-    }
+  @override
+  void dispose() {
+    focusNode.removeListener(prepareScroll);
+    // TODO: implement dispose
+    focusNode.dispose();
+    super.dispose();
   }
 }
