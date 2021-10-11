@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:never_behind_keyboard/never_behind_keyboard.dart';
 
-class NeverHidePage extends StatefulWidget {
-  NeverHidePage({Key? key}) : super(key: key);
+class NeverBehindPage extends StatefulWidget {
+  NeverBehindPage({Key? key}) : super(key: key);
 
   @override
-  _NeverHidePageState createState() => _NeverHidePageState();
+  _NeverBehindPageState createState() => _NeverBehindPageState();
 }
 
-class _NeverHidePageState extends State<NeverHidePage> {
+class _NeverBehindPageState extends State<NeverBehindPage> {
   FocusNode focusNode = FocusNode();
   GlobalKey key = GlobalKey();
 
