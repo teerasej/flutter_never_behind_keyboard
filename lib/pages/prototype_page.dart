@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-class Test2Page extends StatefulWidget {
-  Test2Page({Key? key}) : super(key: key);
+class PrototypePage extends StatefulWidget {
+  PrototypePage({Key? key}) : super(key: key);
 
   @override
-  _Test2PageState createState() => _Test2PageState();
+  _PrototypePageState createState() => _PrototypePageState();
 }
 
-class _Test2PageState extends State<Test2Page> {
+class _PrototypePageState extends State<PrototypePage> {
   FocusNode focusNode = FocusNode();
   GlobalKey key = GlobalKey();
   GlobalKey listViewKey = GlobalKey();
