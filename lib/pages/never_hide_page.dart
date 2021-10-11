@@ -30,36 +30,33 @@ class _NeverHidePageState extends State<NeverHidePage> {
                 height: 400,
               ),
               const Text('Course Name:'),
-              Container(
-                child: Column(
-                  children: [
-                    NeverBehindFocusSource(
-                      child: Column(
-                        children: [
-                          TextField(
-                            decoration: InputDecoration(
-                              hintText:
-                                  "หลักสูตรอบรม Google Flutter 2 สำหรับผู้เริ่มต้น",
-                            ),
+              Column(
+                children: [
+                  NeverBehindFocusSource(
+                    child: Column(
+                      children: [
+                        TextField(
+                          decoration: InputDecoration(
+                            hintText: "ex. Google Flutter 2 for beginner",
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text('ระบุจำนวนผู้เข้าอบรม'),
-                          TextField(),
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text('How many trainee in this course?'),
+                        TextField(),
+                      ],
                     ),
-                    const SizedBox(
-                      height: 70,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Hello'),
-                    ),
-                    NeverBehindBottom(key: GlobalKey()),
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: 70,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Hello'),
+                  ),
+                  NeverBehindBottom(key: GlobalKey()),
+                ],
               ),
             ],
           ),
