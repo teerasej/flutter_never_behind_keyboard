@@ -18,7 +18,7 @@ class _NeverHidePageState extends State<NeverHidePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Never Hide'),
+        title: const Text('Never behind by Teerasej'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
