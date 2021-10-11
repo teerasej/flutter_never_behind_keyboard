@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_never_behind_keyboard/pages/never_hide_page.dart';
+import 'package:flutter_never_behind_keyboard/pages/never_behind_page.dart';
 import 'package:flutter_never_behind_keyboard/pages/prototype_page.dart';
 
 void main() {
@@ -33,6 +33,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return NeverHidePage();
+    return NeverBehindPage();
   }
 }
