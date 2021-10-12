@@ -101,7 +101,7 @@ packages:
       name: never_behind_keyboard
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   path:
     dependency: transitive
     description:
