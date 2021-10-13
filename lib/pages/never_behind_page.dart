@@ -9,11 +9,6 @@ class NeverBehindPage extends StatefulWidget {
 }
 
 class _NeverBehindPageState extends State<NeverBehindPage> {
-  FocusNode focusNode = FocusNode();
-  GlobalKey key = GlobalKey();
-
-  ScrollController scrollController = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +19,6 @@ class _NeverBehindPageState extends State<NeverBehindPage> {
         padding: const EdgeInsets.all(8.0),
         child: NeverBehindKeyboardArea(
           scrollView: ListView(
-            controller: scrollController,
             children: [
               const SizedBox(
                 height: 400,
