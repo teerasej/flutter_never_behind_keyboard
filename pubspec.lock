@@ -98,9 +98,9 @@ packages:
   never_behind_keyboard:
     dependency: "direct main"
     description:
-      name: never_behind_keyboard
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../../flutter-package-project/never_behind_keyboard"
+      relative: true
+    source: path
     version: "1.0.2"
   path:
     dependency: transitive
